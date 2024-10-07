@@ -15,10 +15,10 @@ module.exports = (sequelize) => {
             },
             allowNull: false
         },
-        item: {
+        items: [{
             type: Sequelize.JSON,
             allowNull: true
-        }
+        }]
     });
 
     Cart.associate = (models) => {

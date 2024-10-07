@@ -21,27 +21,27 @@ class CartService{
         }
     }
 
-    async addItem(userID, item) {
-        try{
+    async addItem(userID, newItem) {
+        // try{
 
-            if (await listCartItems(userID) == null){ 
-                const Cart = await create(userID, item);
-                return Cart ? Cart : null;
-            }
-            else{
-                const Cart = await this.Cart.create({
-                    id:id,
-                    userID:userID,
-                    items:items
-                });
-            }
+        //     if (await listCartItems(userID) == null){ 
+        //         const Cart = await create(userID, item);
+        //         return Cart ? Cart : null;
+        //     }
+        //     else{
+        //         const Cart = await this.Cart.create({
+        //             id:id,
+        //             userID:userID,
+        //             items:items
+        //         });
+        //     }
 
-            return newCart ? newCart : null;
+        //     return newCart ? newCart : null;
             
-        }
-        catch (error){
-            throw error;
-        }
+        // }
+        // catch (error){
+        //     throw error;
+        // }
 
 
 

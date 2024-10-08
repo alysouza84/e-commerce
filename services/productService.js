@@ -6,6 +6,7 @@ class ProductService{
         this.Product = ProductModel;
     }
 
+    //Cria um novo registro de produto, contendo nome, descrição, preço e estoque do produto
     async create(name, desc, price, stock){
         try{
             const newProduct = await this.Product.create({
@@ -22,6 +23,7 @@ class ProductService{
         }
     }
 
+    //Altera os atributos de um produto cadastrado através do seu ID
     async update(id, name, desc, price, stock) {
         try {
             const [updatedRowCount] = await this.Product.update(
@@ -41,6 +43,7 @@ class ProductService{
         }
     }
 
+    //Deleta o resgistro de um produto no banco de dados através do seu ID
     async delete(id) {
         try {
             const product = await this.Product.findByPk(id);
@@ -58,6 +61,7 @@ class ProductService{
         }
     }
 
+    //Lista todos os produtos cadastrados
     async findAll()
     {
         try{

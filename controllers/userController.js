@@ -1,15 +1,14 @@
-// ./controllers/userController.js
-
 class UserController{
     constructor(UserService){
         this.userService = UserService;
     }
+
+    //Criar um novo usuário
     async createUser(req,res){
-        //processar a request
         const {email, data_nasc, password} = req.body;
         try{
             const newUser = await this.userService.create(email, data_nasc, password);
-            res.status(200).json(newUser);
+            res.status(200).json(newUser);1
             res.send();
         }
         catch(error){
@@ -19,6 +18,7 @@ class UserController{
         }
     }
 
+    //Listar todos os usuários (Requer autenticação)
     async findAllUsers(req,res){
         try{
             const AllUsers = await this.userService.findAll();
@@ -31,6 +31,7 @@ class UserController{
         }
     }
 
+    //Encontrar um usuário pelo seu ID
     async findUserById(req,res){
         const {id} = req.query;
         try{
@@ -50,7 +51,6 @@ class UserController{
         const {email, password} = req.body;
         try{
             const User  = await this.userService.login(email, password);
-            //Atenção! Vai ter um problema de segurança
             res.status(200).json(User);
         }
         catch(error){

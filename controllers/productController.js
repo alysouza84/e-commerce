@@ -2,6 +2,8 @@ class ProductController{
     constructor(ProductService){
         this.productService = ProductService;
     }
+
+    //Criar um novo produto, recebendo seus atributos do body da requisição
     async createProduct(req,res){
         const {name, desc, price, stock} = req.body;
         try{
@@ -16,6 +18,7 @@ class ProductController{
         }
     }
 
+    //Listar todos os produtos cadastrados
     async findAllProducts(req,res){
         try{
             const AllProducts = await this.productService.findAll();
@@ -28,11 +31,12 @@ class ProductController{
         }
     }
 
+    //Editar os atributos de um produto recebendo seu ID, e os atributos a serem editados no body da requisição
     async updateProduct(req, res){
         const {id} = req.params;
         const {name, desc, price, stock} = req.body;
         try{
-            const updatedProduct = await productService.update(id, name, desc, price, stock);
+            const updatedProduct = await this.productService.update(id, name, desc, price, stock);
 
             if (!updatedProduct) {
                 return res.status(404).json({ error: 'Produto não encontrado.' });
@@ -47,6 +51,7 @@ class ProductController{
         }
      }
 
+    //Deletar um produto do banco de dados através do seu ID
     async deleteProduct(req,res){
         const {id} = req.params;
         try {

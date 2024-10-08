@@ -1,5 +1,5 @@
-// models/user.js
 const Sequelize = require('sequelize');
+
 module.exports = (sequelize) =>{
     const User = sequelize.define('User',{
         id:{
@@ -21,5 +21,6 @@ module.exports = (sequelize) =>{
             allowNull:false
         }
     });
+    
     return User;
 };

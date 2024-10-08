@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-const auth = require('../auth'); //Carregar os objetos do auth.js
+const auth = require('../auth');
 
 //Implementar as dependencias para o funcionamento da classe User
 const db =require('../models') // carregando o banco de dados
@@ -24,7 +24,7 @@ router.post('/login', async(req,res)=>{
 });
 
 //Rota para registrar novo usuário
-router.post('/novouser', async (req,res)=>{
+router.post('/newuser', async (req,res)=>{
   userController.createUser(req,res);
 });
 

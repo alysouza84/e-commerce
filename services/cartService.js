@@ -1,17 +1,19 @@
 const auth = require('../auth');
 const db = require('../models');
-const user = require('../models/user');
 
 class CartService{
     constructor(CartModel){
         this.Cart = CartModel;
     }
 
-    async create(userID, item){
+    //Criação de um novo registro na tabela de carts, contendo o id do usuario, item a ser adicionado no carrinho, a quantidade e o preço total
+    async add(userID, itemID, itemPrice, quantity){
         try{
             const newCart = await this.Cart.create({
                 userID:userID,
-                item:item
+                itemID:itemID,
+                quantity:quantity,
+                totalPrice:itemPrice*quantity
             });
             return newCart ? newCart : null;
             
@@ -21,83 +23,38 @@ class CartService{
         }
     }
 
-    async addItem(userID, newItem) {
-        // try{
-
-        //     if (await listCartItems(userID) == null){ 
-        //         const Cart = await create(userID, item);
-        //         return Cart ? Cart : null;
-        //     }
-        //     else{
-        //         const Cart = await this.Cart.create({
-        //             id:id,
-        //             userID:userID,
-        //             items:items
-        //         });
-        //     }
-
-        //     return newCart ? newCart : null;
-            
-        // }
-        // catch (error){
-        //     throw error;
-        // }
-
-
-
-
-
+    //Remove do banco de dados a linha que representa o item no carrinho do usuário, recebendo o id do item e do usuário
+    async remove(userID, itemID) {
         try {
-            const cart = await this.Cart.findOne({
-                where: { userID: userID }
+            const cartItem = await this.Cart.destroy({
+                where: {
+                    userID: userID,
+                    itemID: itemID
+                }
             });
-
-            if (cart) {
-                cart.items.push(newItem); 
-                await cart.save(); 
-                return cart.items;
-            } else {
-                return null;
-            }
+    
+            return cartItem > 0;
         } catch (error) {
             throw error;
         }
     }
 
-    async removeItem(userID, itemToRemove) {
+
+    //Lista todos os itens adicionados no carrinho pelo usuário, mostrando todos os registros da tabela com seu ID
+    async listAllItems(userID) {
         try {
-            const cart = await this.Cart.findOne({
-                where: { userID: userID }
+            const items = await this.Cart.findAll({
+                where: {
+                    userID: userID
+                }
             });
 
-            if (cart) {
-                
-                cart.items = cart.items.filter(item => item !== itemToRemove);
-                await cart.save(); 
-                return cart.items;
-            } else {
-                return null;
-            }
+            return items ? items : null;
         } catch (error) {
             throw error;
         }
     }
-
-    async listCartItems(userID) {
-        try {
-            const cart = await this.Cart.findOne({
-                where: { userID: userID }
-            });
-            
-            if (cart) {
-                return cart.itens; 
-            } else {
-                return null; 
-            }
-        } catch (error) {
-            throw error; 
-        }
-    }
+    
     
 }
 

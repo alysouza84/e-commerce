@@ -1,4 +1,5 @@
 const Sequelize = require('sequelize');
+
 module.exports = (sequelize) =>{
     const Product = sequelize.define('Product',{
         id:{
@@ -24,5 +25,6 @@ module.exports = (sequelize) =>{
         }
         
     });
+    
     return Product;
 };

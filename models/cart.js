@@ -15,15 +15,35 @@ module.exports = (sequelize) => {
             },
             allowNull: false
         },
-        items: [{
-            type: Sequelize.JSON,
-            allowNull: true
-        }]
+        itemID:{
+            type: Sequelize.INTEGER,
+            references: {
+                model: 'Products', 
+                key: 'id' 
+            },
+            allowNull: false
+        },
+        quantity:{
+            type: Sequelize.INTEGER,
+            default: 1
+        },
+        totalPrice:{
+            type: Sequelize.FLOAT,
+            allowNull: false
+        }
     });
 
     Cart.associate = (models) => {
         Cart.belongsTo(models.User, {
             foreignKey: 'userID',
+            onDelete: 'CASCADE', 
+            onUpdate: 'CASCADE'  
+        });
+    };
+
+    Cart.associate = (models) => {
+        Cart.belongsTo(models.Product, {
+            foreignKey: 'itemID',
             onDelete: 'CASCADE', 
             onUpdate: 'CASCADE'  
         });

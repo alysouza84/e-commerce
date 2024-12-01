@@ -3,15 +3,15 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var sequelize = require('./models').sequelize;
-
+var cors = require('cors');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var productRouter = require('./routes/products');
 var cartRouter = require('./routes/cart')
 var paymentRouter = require('./routes/payment')
-
 var app = express();
 
+app.use(cors({allowedHeaders: ['authorization', 'Content-Type']}));
 app.use(logger('dev'));
 app.use(express.json()); 
 app.use(express.urlencoded({ extended: false }));

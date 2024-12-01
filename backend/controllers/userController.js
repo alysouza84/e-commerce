@@ -5,10 +5,10 @@ class UserController{
 
     //Criar um novo usuário
     async createUser(req,res){
-        const {email, data_nasc, password} = req.body;
+        const {username, email, data_nasc, password} = req.body;
         try{
-            const newUser = await this.userService.create(email, data_nasc, password);
-            res.status(200).json(newUser);1
+            const newUser = await this.userService.create(username, email, data_nasc, password);
+            res.status(200).json(newUser);
             res.send();
         }
         catch(error){
@@ -49,12 +49,13 @@ class UserController{
     //Método para login
     async login(req,res){
         const {email, password} = req.body;
-        try{
-            const User  = await this.userService.login(email, password);
-            res.status(200).json(User);
-        }
-        catch(error){
-            res.status(500).json({error: 'Erro ao logar o usuário'});
+        try {
+            const User = await this.userService.login(email, password);
+            if (User) {
+                return res.status(200).json(User); 
+            }
+        } catch (error) {
+           return res.status(401).json({ message: error.message });
         }
     }
 }

@@ -14,8 +14,10 @@ async function generateToken(user){
 //método para verificar a validade do token jwt
 async function verifyToken(req, res, next){
     //Extrair o cabeçalho (header) que contem o token jwt
-    const authheader =req.headers['authorization'];
+    const authheader = req.headers['authorization'];
+    
     if(!authheader){
+        console.log('Não encontrei');
         return res.status(401).json({Message:'Token não informado'});
     }
     //Extrair o token jwt

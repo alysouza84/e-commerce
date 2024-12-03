@@ -50,11 +50,16 @@ function App() {
               )}
               {isLoggedIn && (
               <li className="nav-item">
+                <button className="nav-link btn" onClick={() => handleNavClick('fornecedores')}>Fornecedores</button>
+              </li>
+              )}
+              {isLoggedIn && (
+              <li className="nav-item">
                 <button className="nav-link btn" onClick={() => handleNavClick('createProduct')}>Cadastrar Produto</button>
               </li>
               )}
               <li className="nav-item">
-                <button className="nav-link btn" onClick={() => handleNavClick('listProducts')}>Lista de Produtos</button>
+                <button className="nav-link btn" onClick={() => handleNavClick('listProducts')}>Produtos</button>
               </li>
               {isLoggedIn && (
               <li className="nav-item">
@@ -83,6 +88,12 @@ function App() {
         {currentPage === 'login' && (
           <div className="mt-4">
             <LoginForm onLogin={handleLogin}/>
+          </div>
+        )}
+
+        {currentPage === 'fornecedores' && (
+          <div className="mt-4">
+            /* Tela de fornecedores */
           </div>
         )}
 

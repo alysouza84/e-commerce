@@ -5,9 +5,9 @@ class SupplierController{
 
     //Criar um novo fornecedor (Requer autenticação)
     async createSupplier(req,res){
-        const {name, email, productType} = req.body;
+        const {name, email, itemID} = req.body;
         try{
-            const newSupplier = await this.supplierService.create(name, email, productType);
+            const newSupplier = await this.supplierService.create(name, email, itemID);
             res.status(200).json(newSupplier);
             res.send();
         }

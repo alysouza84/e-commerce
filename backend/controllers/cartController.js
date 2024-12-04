@@ -19,10 +19,9 @@ class CartController{
 
     //Remove itens do carrinho, recebendo o id de usuário para identificação do carrinho de compras e id do produto a ser removido
     async removeFromCart(req,res){
-        const {itemID} = req.params;
-        const {userID} = req.body;
+        const {cartID} = req.params;
         try {
-            const removeCart = await this.cartService.remove(userID, itemID);
+            const removeCart = await this.cartService.remove(cartID);
 
             if (!removeCart) {
                 return res.status(404).json({ error: 'Item não encontrado.' });
@@ -40,9 +39,9 @@ class CartController{
 
     //Lista todos os itens do carrinho de compras do usuário
     async listAllItems(req, res){
-        const {userID} = req.body;
+        const {id} = req.params;
         try{
-            const result = await this.cartService.listAllItems(userID);
+            const result = await this.cartService.listAll(id);
             res.status(200).json(result);
         }
         catch(error){

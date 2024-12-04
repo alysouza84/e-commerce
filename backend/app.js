@@ -7,8 +7,9 @@ var cors = require('cors');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var productRouter = require('./routes/products');
-var cartRouter = require('./routes/cart')
-var paymentRouter = require('./routes/payment')
+var cartRouter = require('./routes/cart');
+var paymentRouter = require('./routes/payment');
+var suppliersRouter = require('./routes/suppliers');
 var app = express();
 
 app.use(cors({allowedHeaders: ['authorization', 'Content-Type']}));
@@ -23,6 +24,7 @@ app.use('/users', usersRouter);
 app.use('/products', productRouter);
 app.use('/cart', cartRouter);
 app.use('/payment', paymentRouter);
+app.use('/suppliers', suppliersRouter);
 
 const db = require('./models');
 

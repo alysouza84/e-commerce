@@ -17,12 +17,12 @@ router.post('/newsupplier', auth.verifyToken, async(req,res)=>{
 });
 
 //Rota para retornar todos os usuários
-router.get('/allsuppliers', auth.verifyToken, async(req,res)=>{
+router.get('/all', auth.verifyToken, async(req,res)=>{
   supplierController.findAllSuppliers(req,res);
 });
 
 //Rota para retonar um usuário pelo id
-router.get('/getSupplierById', auth.verifyToken, async(req,res)=>{
+router.get('/:id', auth.verifyToken, async(req,res)=>{
   supplierController.findSupplierById(req,res);
 });
 

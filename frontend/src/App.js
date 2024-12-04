@@ -4,12 +4,17 @@ import UserAccountForm from './userAccountForm.js';
 import LoginForm from './loginForm.js';
 import ListProducts from './listProducts.js';
 import CreateProductForm from './createProductForm.js';
+import EditProductForm from './editProductForm.js';
+import Cart from './cart.js';
 import 'bootstrap/dist/css/bootstrap.min.css'; 
+import Supplier from './supplier.js';
 
 function App() {
   const [currentPage, setCurrentPage] = useState('landing');
   const [isLoggedIn, setIsLoggedIn] = useState(false); 
   const [username, setUsername] = useState('');
+  const [userID, setUserID] = useState(null);
+  const [selectedProductId, setSelectedProductId] = useState(null);
 
   const handleNavClick = (page) => {
     setCurrentPage(page);
@@ -17,13 +22,19 @@ function App() {
 
   const handleLogin = (user) => {
       setIsLoggedIn(true);  
-      setUsername(user); 
+      setUsername(user.username);
+      setUserID(user.id); 
   };
 
   const handleLogout = () => {
     setIsLoggedIn(false);  
     setUsername('');  
     localStorage.removeItem('Token');
+  };
+
+  const handleEditProduct = (productId) => {
+    setSelectedProductId(productId);
+    setCurrentPage('editProduct');
   };
 
   return (
@@ -50,7 +61,7 @@ function App() {
               )}
               {isLoggedIn && (
               <li className="nav-item">
-                <button className="nav-link btn" onClick={() => handleNavClick('fornecedores')}>Fornecedores</button>
+                <button className="nav-link btn" onClick={() => handleNavClick('suppliers')}>Fornecedores</button>
               </li>
               )}
               {isLoggedIn && (
@@ -63,13 +74,17 @@ function App() {
               </li>
               {isLoggedIn && (
               <li className="nav-item">
+                <button className="nav-link btn" onClick={() => handleNavClick('cart')}>Carrinho</button>
+              </li>
+            )}
+              {isLoggedIn && (
+              <li className="nav-item">
                 <button className="nav-link btn" onClick={handleLogout}>Sair</button>
               </li>
             )}
             </ul>
           </div>
         </nav>
-
 
       {/* Main Content */}
       <div className="container text-center mt-5">
@@ -91,9 +106,9 @@ function App() {
           </div>
         )}
 
-        {currentPage === 'fornecedores' && (
+        {currentPage === 'suppliers' && (
           <div className="mt-4">
-            /* Tela de fornecedores */
+            <Supplier />
           </div>
         )}
 
@@ -103,11 +118,19 @@ function App() {
           </div>
         )}
 
-        {currentPage === 'listProducts' && (
+        {currentPage === 'listProducts' && userID && (
           <div className="mt-4">
-            <ListProducts /> 
+            <ListProducts onEditProduct={handleEditProduct} isLoggedIn={isLoggedIn} userID={userID}/> 
           </div>
-        )}  
+        )} 
+
+        {currentPage === 'editProduct' && selectedProductId && (
+          <EditProductForm productId={selectedProductId} />
+        )} 
+
+        {currentPage === 'cart' && userID && (
+          <Cart userID={userID} />
+        )} 
 
         {currentPage === 'logout' && (
           <div className="mt-4">

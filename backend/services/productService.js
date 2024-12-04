@@ -73,6 +73,18 @@ class ProductService{
         }
 
     }
+
+    //Procura um produto no banco de dados através do seu ID
+    async findById(id){
+        try{
+            const Product = await this.Product.findByPk(id, { raw: true });
+            return Product ? Product : null;
+        }
+        catch(error){
+                throw error;
+        }
+    
+    }
 }
 
 module.exports = ProductService;

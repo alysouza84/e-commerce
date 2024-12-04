@@ -31,6 +31,20 @@ class ProductController{
         }
     }
 
+    async findProductById(req,res){
+        const {id} = req.params;
+        try{
+            const Product = await this.productService.findById(id);
+            res.status(200).json(Product);
+        }
+        catch(error){
+            res
+                .status(500)
+                .json({error: 'Ocorreu um erro ao localizar o produto pelo ID.'});
+        }
+
+    }
+
     //Editar os atributos de um produto recebendo seu ID, e os atributos a serem editados no body da requisição
     async updateProduct(req, res){
         const {id} = req.params;

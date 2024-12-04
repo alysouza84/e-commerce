@@ -26,7 +26,7 @@ const LoginForm = ({ onLogin }) => {
             if (response.status === 200) {
                 localStorage.setItem('Token', response.data.Token);
                 setResponseMessage('Login feito com sucesso!');
-                onLogin(response.data.username);
+                onLogin(response.data);
             } else {
                 setResponseMessage('Erro no login do usuário.');
             }

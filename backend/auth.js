@@ -17,7 +17,7 @@ async function verifyToken(req, res, next){
     const authheader = req.headers['authorization'];
     
     if(!authheader){
-        console.log('Não encontrei');
+        console.log('Token inválido!');
         return res.status(401).json({Message:'Token não informado'});
     }
     //Extrair o token jwt

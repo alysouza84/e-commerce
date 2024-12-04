@@ -17,11 +17,23 @@ module.exports = (sequelize) =>{
             unique: true,
             allowNull: false
         },
-        productType:{
-            type: Sequelize.STRING,
+        itemID:{
+            type: Sequelize.INTEGER,
+            references: {
+                model: 'Products', 
+                key: 'id' 
+            },
             allowNull: false
         }
     });
+
+    Supplier.associate = (models) => {
+        Supplier.belongsTo(models.Product, {
+            foreignKey: 'itemID',
+            onDelete: 'CASCADE', 
+            onUpdate: 'CASCADE'  
+        });
+    };
     
     return Supplier;
 };

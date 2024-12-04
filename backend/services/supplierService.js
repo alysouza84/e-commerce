@@ -8,12 +8,12 @@ class SupplierService{
     }
 
     //Cria um novo registro de fornecedor, contendo nome, email e tipo de produto
-    async create(name, email, productType){
+    async create(name, email, itemID){
         try{
             const newSupplier = await this.Supplier.create({
                 name: name,
                 email: email,
-                productType: productType
+                itemID: itemID
             });
     
             return newSupplier ? newSupplier : null;

@@ -24,12 +24,11 @@ class CartService{
     }
 
     //Remove do banco de dados a linha que representa o item no carrinho do usuário, recebendo o id do item e do usuário
-    async remove(userID, itemID) {
+    async remove(cartID) {
         try {
             const cartItem = await this.Cart.destroy({
                 where: {
-                    userID: userID,
-                    itemID: itemID
+                    id: cartID
                 }
             });
     
@@ -39,17 +38,17 @@ class CartService{
         }
     }
 
-
     //Lista todos os itens adicionados no carrinho pelo usuário, mostrando todos os registros da tabela com seu ID
-    async listAllItems(userID) {
+    async listAll(id) {
         try {
             const items = await this.Cart.findAll({
                 where: {
-                    userID: userID
-                }
+                    userID: id
+                },
+                raw: true 
             });
-
             return items ? items : null;
+
         } catch (error) {
             throw error;
         }

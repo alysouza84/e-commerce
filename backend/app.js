@@ -34,7 +34,7 @@ async function applyDataStructure(){
 
 applyDataStructure();
 
-var port = 8080;
+const port = ProcessingInstruction.env.PORT || 8080;
 app.listen(port,()=>{
     console.log(`Servidor rodando na porta ${port}`);
 });

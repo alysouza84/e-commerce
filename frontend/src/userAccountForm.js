@@ -23,9 +23,9 @@ const UserAccountForm = ({ onAccountCreated }) => {
         e.preventDefault();
         
         try {
-          const response = await axios.post('http://localhost:8080/users/newuser', formData);
-          
-          if(response.status === 200){
+            const response = await axios.post('https://e-commerce-energetico.onrender.com/users/newuser', formData);
+            // Verifica se a criação da conta foi bem-sucedida          
+            if(response.status === 200){
                 setResponseMessage('Conta criada com sucesso! Redirecionando para a página de Login [...]');
                 setTimeout(() => {
                     onAccountCreated()

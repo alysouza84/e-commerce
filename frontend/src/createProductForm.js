@@ -29,7 +29,8 @@ const CreateProductForm = () => {
                 'authorization': `Bearer ${Token}`
               }
 
-            const response = await axios.post('http://localhost:8080/products/newproduct', formData, {
+              const response = await axios.post('https://e-commerce-energetico.onrender.com/products/newproduct', formData, 
+            {
                 headers: headers
             });
           

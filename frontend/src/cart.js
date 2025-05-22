@@ -8,7 +8,14 @@ const Cart = ({ userID }) => {
   // Função para buscar os detalhes do produto (como nome) com base no ID do produto
   const fetchProductDetails = async (productID) => {
     try {
-      const response = await axios.get(`http://localhost:8080/products/${productID}`);
+      const response = await axios.get(`https://e-commerce-energetico.onrender.com/products/${productID}`);
+      if (response.status !== 200) {
+        throw new Error('Erro ao buscar detalhes do produto');
+      }
+      // Verifica se o produto foi encontrado
+      if (!response.data) {
+        throw new Error('Produto não encontrado');
+      }
       return response.data; // Retorna os dados do produto
     } catch (error) {
       console.error('Erro ao buscar detalhes do produto:', error);
@@ -25,7 +32,7 @@ const Cart = ({ userID }) => {
       };
 
       // Buscar os itens do carrinho
-      const response = await axios.get(`http://localhost:8080/cart/${userID}`, {
+      const response = await axios.get(`https://e-commerce-energetico.onrender.com/cart/${userID}`, {
         headers: headers,
       });
       const cartItems = response.data;
@@ -56,7 +63,7 @@ const Cart = ({ userID }) => {
         };
   
         // Envia a requisição para remover o item
-        await axios.delete(`http://localhost:8080/cart/remove/${cartID}`, {
+        await axios.delete(`https://e-commerce-energetico.onrender.com/cart/remove/${cartID}`, {
           headers: headers,
         });
   

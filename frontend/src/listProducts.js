@@ -8,7 +8,7 @@ const ListProducts = ({ onEditProduct, isLoggedIn, userID }) => {
   // Função para buscar todos os produtos do servidor
   const fetchProducts = async () => {
     try {
-      const response = await axios.get('http://localhost:8080/products/all');
+      const response = await axios.get('https://e-commerce-energetico.onrender.com/products/all');
       setProducts(response.data);
     } catch (error) {
       alert('Erro ao buscar produtos no servidor: ', error);
@@ -30,7 +30,7 @@ const ListProducts = ({ onEditProduct, isLoggedIn, userID }) => {
       const headers = {
         'authorization': `Bearer ${Token}`,
       };
-      const response = await axios.post('http://localhost:8080/cart/add', {
+      const response = await axios.post('https://e-commerce-energetico.onrender.com/cart/add', {
         userID: userID,
         itemID: productId,
         itemPrice: productPrice,

@@ -21,8 +21,8 @@ const LoginForm = ({ onLogin }) => {
         e.preventDefault();
         
         try {
-            const response = await axios.post('http://localhost:8080/users/login', formData);
-            
+            const response = await axios.post('https://e-commerce-energetico.onrender.com/users/login', formData);
+            // Verifica se o login foi bem-sucedido            
             if (response.status === 200) {
                 localStorage.setItem('Token', response.data.Token);
                 setResponseMessage('Login feito com sucesso!');
